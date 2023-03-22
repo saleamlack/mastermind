@@ -55,6 +55,10 @@ class Board
       code_holes[guess_turn - 1][idx] = "\e[5m0\e[0m"
     end
   end
+
+  def breaked?
+    secret_code == code_holes[guess_turn - 1]
+  end
 end
 
 board = Board.new
