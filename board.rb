@@ -59,6 +59,10 @@ class Board
   def breaked?
     secret_code == code_holes[guess_turn - 1]
   end
+
+  def full?
+    guess_turn > 12
+  end
 end
 
 board = Board.new
