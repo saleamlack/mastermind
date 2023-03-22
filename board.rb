@@ -63,6 +63,10 @@ class Board
   def full?
     guess_turn > 12
   end
+
+  def break_shield
+    self.shield = secret_code.join(' ') unless breaked?
+  end
 end
 
 board = Board.new
