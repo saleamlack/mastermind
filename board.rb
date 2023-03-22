@@ -49,6 +49,14 @@ class Board
     end
     puts "\e[33;2m========================\e[0m"
   end
+
+  def track_active_row
+    code_holes[guess_turn - 1].each_index do |idx|
+      code_holes[guess_turn - 1][idx] = "\e[5m0\e[0m"
+    end
+  end
 end
 
-Board.new.draw_board
+board = Board.new
+board.track_active_row
+board.draw_board
