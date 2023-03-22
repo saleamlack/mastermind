@@ -56,6 +56,12 @@ class Board
     end
   end
 
+  def get_first_empty_key_hole
+    key_holes[guess_turn - 1].each_with_index do |hole, idx|
+      break idx if hole.nil?
+    end
+  end
+
   def breaked?
     secret_code == code_holes[guess_turn - 1]
   end
