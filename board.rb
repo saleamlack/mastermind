@@ -56,15 +56,15 @@ class Board
     end
   end
 
-  def get_first_empty_key_hole
+  def first_empty_key_hole
     key_holes[guess_turn - 1].each_with_index do |hole, idx|
       break idx if hole.nil?
     end
   end
 
-  def set_key_pegs(guess_code)
+  def key_pegs=(guess_code)
     copy_code = []
-    secret_code.each {|code| copy_code << code}
+    secret_code.each { |code| copy_code << code }
     4.times do |i|
       hole_idx = get_first_empty_key_hole
       if copy_code[i] == guess_code[i]
@@ -74,7 +74,7 @@ class Board
         key_holes[guess_turn - 1][hole_idx] = "\e[47m-\e[0m"
         copy_code[i] = nil
       end
-    end 
+    end
   end
 
   def breaked?
