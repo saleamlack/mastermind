@@ -13,6 +13,7 @@ class Board
   end
 
   def draw_board
+    track_active_row
     print_score
     print_holes
     print_codes
@@ -56,12 +57,6 @@ class Board
     end
   end
 
-  def first_empty_key_hole
-    key_holes[guess_turn - 1].each_with_index do |hole, idx|
-      break idx if hole.nil?
-    end
-  end
-
   def key_pegs=(guess_code)
     copy_code = secret_code.dup
     copy_code.zip(guess_code).each do |secret_peg, guess_peg|
@@ -86,6 +81,20 @@ class Board
 
   def break_shield
     self.shield = secret_code.join(' ') unless breaked?
+  end
+
+  private
+
+  def track_active_row
+    code_holes[guess_turn - 1].each_index do |idx|
+      code_holes[guess_turn - 1][idx] = "\e[5m0\e[0m"
+    end
+  end
+
+  def first_empty_key_hole
+    key_holes[guess_turn - 1].each_with_index do |hole, idx|
+      break idx if hole.nil?
+    end
   end
 end
 
