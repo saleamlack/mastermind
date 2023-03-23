@@ -63,17 +63,16 @@ class Board
   end
 
   def key_pegs=(guess_code)
-    copy_code = []
-    secret_code.each { |code| copy_code << code }
-    4.times do |i|
-      hole_idx = get_first_empty_key_hole
-      if copy_code[i] == guess_code[i]
-        key_holes[guess_turn - 1][hole_idx] = "\e[41m-\e[0m"
-        copy_code[i] = nil
-      elsif copy_code.include?(guess_code[i])
-        key_holes[guess_turn - 1][hole_idx] = "\e[47m-\e[0m"
-        copy_code[i] = nil
-      end
+    copy_code = secret_code.dup
+    copy_code.zip(guess_code).each do |secret_peg, guess_peg|
+      hole_idx = first_empty_key_hole
+      key_holes[guess_turn - 1][hole_idx] =
+        if secret_peg == guess_peg
+          "\e[41m-\e[0m"
+        elsif copy_code.include?(guess_code[i])
+          "\e[47m-\e[0m"
+        end
+      copy_code[copy_code.index(secret_code)] = nil
     end
   end
 
