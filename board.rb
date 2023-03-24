@@ -53,6 +53,7 @@ class Board
 
   def code_pegs=(guess_code)
     code_holes[guess_turn - 1] = guess_code
+    guess_turn += 1
   end
 
   def key_pegs=(guess_code)
@@ -113,6 +114,3 @@ class Board
     end
   end
 end
-
-board = Board.new
-board.draw_board
