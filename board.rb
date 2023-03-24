@@ -51,23 +51,21 @@ class Board
     puts "\e[33;2m========================\e[0m"
   end
 
-  def track_active_row
-    code_holes[guess_turn - 1].each_index do |idx|
-      code_holes[guess_turn - 1][idx] = "\e[5m0\e[0m"
-    end
-  end
-
   def key_pegs=(guess_code)
-    copy_code = secret_code.dup
-    copy_code.zip(guess_code).each do |secret_peg, guess_peg|
+    red_pegs = 0
+    white_pegs = 0
+    count_key_pegs(guess_code, red_pegs, white_pegs)
+    white_pegs -= red_pegs
+    guess_code.each do
       hole_idx = first_empty_key_hole
       key_holes[guess_turn - 1][hole_idx] =
-        if secret_peg == guess_peg
+        if red_pegs.positve?
+          red_pegs -= 1
           "\e[41m-\e[0m"
-        elsif copy_code.include?(guess_code[i])
+        elsif white_pegs.positive?
+          white_pegs -= 1
           "\e[47m-\e[0m"
         end
-      copy_code[copy_code.index(secret_code)] = nil
     end
   end
 
@@ -96,8 +94,21 @@ class Board
       break idx if hole.nil?
     end
   end
+
+  def count_key_pegs(guess_code, red_pegs, white_pegs)
+    secret_counts = {}
+    guess_code.each_with_index do |peg, i|
+      secret_counts[peg] = secret_code.count(peg) unless secret_counts[peg]
+      next unless secret_counts[peg]
+
+      red_pegs += 1 if peg == secret_code[i]
+      if secret_counts[peg].positive?
+        white_pegs += 1
+        secret_counts[peg] -= 1
+      end
+    end
+  end
 end
 
 board = Board.new
-board.track_active_row
 board.draw_board
