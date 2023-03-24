@@ -7,6 +7,7 @@ class Game
   def initialize(player1_obj, player2_obj)
     self.player1 = player1_obj
     self.player2 = player2_obj
+    self.board = Board.new
     self.game_round = 1
     self.codemaker = nil
     self.codebreaker = nil
