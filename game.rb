@@ -24,4 +24,15 @@ class Game
       end
     codemaker.code_maker = true
   end
+
+  def switch_codemaker
+    codemaker.code_maker = false
+    self.codemaker, self.codebreaker =
+      if codemaker == player1
+        [player2, player1]
+      else
+        [player1, player2]
+      end
+    codemaker.code_maker = true
+  end
 end
