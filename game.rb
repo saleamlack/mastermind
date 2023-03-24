@@ -8,6 +8,8 @@ class Game
     self.player1 = player1_obj
     self.player2 = player2_obj
     self.game_round = 1
+    self.codemaker = nil
+    self.codebreaker = nil
   end
 
   def code_maker
