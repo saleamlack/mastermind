@@ -51,6 +51,10 @@ class Board
     puts "\e[33;2m========================\e[0m"
   end
 
+  def code_pegs=(guess_code)
+    code_holes[guess_turn - 1] = guess_code
+  end
+
   def key_pegs=(guess_code)
     red_pegs = 0
     white_pegs = 0
