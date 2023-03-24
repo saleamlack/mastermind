@@ -26,10 +26,17 @@ class HumanPlayer < Player
   private
 
   def prompt_message
-    puts 'Please enter your guess using numbers of each color.' unless self.code_maker
-    puts 'Please enter your secret code using numbers of each color.' if self.code_maker
+    puts 'Please enter your guess using numbers of each color.' unless code_maker
+    puts 'Please enter your secret code using numbers of each color.' if code_maker
     puts 'Note: the numbers must be'
-    puts " - \e[31mIn correct oreder \e[37m(left-right)\e[0m\e[0m"
+    puts " - \e[31mIn correct order \e[37m(left-right)\e[0m\e[0m"
     puts " - \e[31mSeparated by spaces.\e[37m(ex. 1 2 3 4)\e[0m\e[0m"
+  end
+end
+
+# define behavior of computer player
+class ComputerPlayer < Player
+  def make_code
+    (1111..6666).to_a.sample
   end
 end
