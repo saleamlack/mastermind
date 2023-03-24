@@ -13,13 +13,15 @@ class Game
   end
 
   def code_maker
-    puts 'Who make the code?'
-    puts "\t1. #{player1.name}"
-    puts "\t2. #{player2.name}"
-    if gets.chomp.to_i == 1
-      player1.code_maker = true
-    else
-      player2.code_maker = true
-    end
+    puts "Who make the code?
+    1. #{player1.name}
+    2. #{player2.name}"
+    self.codemaker, self.codebreaker =
+      if gets.chomp.to_i == 1
+        [player1, player2]
+      else
+        [player2, player1]
+      end
+    codemaker.code_maker = true
   end
 end
