@@ -15,7 +15,12 @@ end
 class HumanPlayer < Player
   def make_code
     prompt_message
-    secret_code = gets.chomp.split(' ')
+    secret_code = gets.chomp.split
+  end
+
+  def guess_code
+    prompt_message
+    guess_code = gets.chomp.split
   end
 
   private
