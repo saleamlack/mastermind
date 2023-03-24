@@ -2,6 +2,7 @@
 
 # A class to track state of players
 class Player
+  attr_accessor :name, :score, :code_maker
   def initialize(name)
     self.name = name
     self.score = 0
