@@ -80,7 +80,7 @@ class Board
   end
 
   def break_shield
-    self.shield = secret_code.join(' ') if breaked? || full?
+    self.shield = secret_code.join(' ')
   end
 
   private
