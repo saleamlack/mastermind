@@ -27,7 +27,7 @@ class Board
   end
 
   def print_holes
-    puts "\e[43m  \e[0m\e[44;1m #{@shield} \e[0m\e[43m    Feed    \e[0m"
+    puts "\e[43m  \e[0m\e[41;1m #{@shield} \e[0m\e[43m    Feed    \e[0m"
     code_holes.reverse.each_with_index do |holes, i|
       comb = holes + key_holes.reverse[i]
       print "\e[44m  \e[0m\e[45; \e[0m"
@@ -57,14 +57,11 @@ class Board
   end
 
   def key_pegs=(guess_code)
-    red_pegs = 0
-    white_pegs = 0
-    count_key_pegs(guess_code, red_pegs, white_pegs)
-    white_pegs -= red_pegs
+    white_pegs, red_pegs = count_key_pegs(guess_code)
     guess_code.each do
       hole_idx = first_empty_key_hole
       key_holes[guess_turn - 1][hole_idx] =
-        if red_pegs.positve?
+        if red_pegs.positive?
           red_pegs -= 1
           "\e[41m-\e[0m"
         elsif white_pegs.positive?
@@ -100,8 +97,10 @@ class Board
     end
   end
 
-  def count_key_pegs(guess_code, red_pegs, white_pegs)
+  def count_key_pegs(guess_code)
     secret_counts = {}
+    white_pegs = 0
+    red_pegs = 0
     guess_code.each_with_index do |peg, i|
       secret_counts[peg] = secret_code.count(peg) unless secret_counts[peg]
       next unless secret_counts[peg]
@@ -112,5 +111,7 @@ class Board
         secret_counts[peg] -= 1
       end
     end
+    white_pegs -= red_pegs
+    [white_pegs, red_pegs]
   end
 end
