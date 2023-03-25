@@ -52,8 +52,10 @@ class Board
   end
 
   def code_pegs=(guess_code)
-    code_holes[guess_turn - 1] = guess_code
-    guess_turn += 1
+    code_holes[guess_turn - 1] = guess_code.map do |code|
+      code = code.to_i
+      code == 6 ? "\e[4#{code + 1}m#{code}\e[0m" : "\e[4#{code}m#{code}\e[0m"
+    end
   end
 
   def key_pegs=(guess_code)
@@ -69,6 +71,7 @@ class Board
           "\e[47m-\e[0m"
         end
     end
+    self.guess_turn += 1
   end
 
   def breaked?(guess_code)
