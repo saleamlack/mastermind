@@ -71,8 +71,8 @@ class Board
     end
   end
 
-  def breaked?
-    secret_code == code_holes[guess_turn - 1]
+  def breaked?(guess_code)
+    secret_code == guess_code
   end
 
   def full?
