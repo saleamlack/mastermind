@@ -12,8 +12,8 @@ class Board
     self.shield = 'SHIELD'
   end
 
-  def draw_board
-    track_active_row
+  def draw_board(guess_code)
+    track_active_row(guess_code)
     print_score
     print_holes
     print_codes
@@ -85,7 +85,8 @@ class Board
 
   private
 
-  def track_active_row
+  def track_active_row(guess_code)
+    return if full? || breaked?(guess_code)
     code_holes[guess_turn - 1].each_index do |idx|
       code_holes[guess_turn - 1][idx] = "\e[5m0\e[0m"
     end
