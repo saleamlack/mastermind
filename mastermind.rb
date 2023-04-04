@@ -11,4 +11,29 @@ module Mastermind
       solution.to_s.split('').all? { |code| COLOR_CODES.include?(code) }
     end
   end
+
+    # provides a method for counting the number of red and white pegs
+  module CountPegs
+    def count_key_pegs(guess_code, secret_code)
+      white_pegs = 0
+      red_pegs = 0
+      secret_counts = secret_count_peg(secret_code)
+      guess_code.each_with_index do |peg, i|
+        red_pegs += 1 if peg == secret_code[i]
+        if secret_counts[peg].positive?
+          white_pegs += 1
+          secret_counts[peg] -= 1
+        end
+      end
+      [white_pegs -= red_pegs, red_pegs]
+    end
+
+    private
+
+    def secret_count_peg(secret_code)
+      secret_code.each_with_object(Hash.new(0)) do |peg, counts|
+        counts[peg] += 1
+      end
+    end
+  end
 end
