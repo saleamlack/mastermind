@@ -10,6 +10,12 @@ class HumanPlayer
   include InstructionAndText
   include Validator
 
+  attr_accessor :code_maker
+
+  def initialize
+    self.code_maker = false
+  end
+
   def make_code
     puts "\nPlease create secret code."
     print "\e[34mSecret code\e[0m: "
