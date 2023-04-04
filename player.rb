@@ -2,7 +2,9 @@
 
 require_relative 'mastermind'
 
-# A class to define behaviors of human player
+# reprensts a human player in the game
+# include methods for making and guessing codes, as well as
+# validate each inputs
 class HumanPlayer
   include Mastermind
   include InstructionAndText
@@ -34,9 +36,47 @@ class HumanPlayer
   end
 end
 
-# define behavior of computer player
+# represents a computer player in the game
+# include methods for making and guessing codes, as well as evaluating guesses
 class ComputerPlayer
+  include Mastermind
+  include MastermindConfig
+  include CountPegs
+
+  attr_accessor :best_score, :new_solutions, :last_guess
+
+  def initialize
+    self.last_guess = nil
+    self.best_score = -1
+    self.new_solutions = SOLUTION_CODES
+  end
+
   def make_code
-    (1111..6666).to_a.sample
+    new_solutions.sample.to_s.split('')
+  end
+
+  def guess_code(secret_code)
+    sleep(1)
+    return generate_guess(secret_code) if best_score == -1
+
+    self.new_solutions = new_solutions.select do |code|
+      guess = code.to_s.split('')
+      score = evaluate(last_guess, guess)
+      score == best_score
+    end
+    generate_guess(secret_code)
+  end
+
+  private
+
+  def generate_guess(secret_code)
+    self.last_guess = make_code
+    self.best_score = evaluate(last_guess, secret_code)
+    last_guess
+  end
+
+  def evaluate(guess, secret_code)
+    white_pegs, red_pegs = count_key_pegs(guess, secret_code)
+    white_pegs + red_pegs * 2
   end
 end
