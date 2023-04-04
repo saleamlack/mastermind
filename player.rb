@@ -1,18 +1,7 @@
 # frozen_string_literal: true
 
-# A class to track state of players
-class Player
-  attr_accessor :name, :score, :code_maker
-
-  def initialize(name)
-    self.name = name
-    self.score = 0
-    self.code_maker = false
-  end
-end
-
 # A class to define behaviors of human player
-class HumanPlayer < Player
+class HumanPlayer
   def make_code
     prompt_message
     secret_code = gets.chomp.split
@@ -35,7 +24,7 @@ class HumanPlayer < Player
 end
 
 # define behavior of computer player
-class ComputerPlayer < Player
+class ComputerPlayer
   def make_code
     (1111..6666).to_a.sample
   end
