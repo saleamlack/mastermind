@@ -67,6 +67,11 @@ module Mastermind
       end
     end
 
+    def invalid_code
+      puts "\e[31mInvalid code! Please enter a combination of 'FOUR' colors by\e[0m"
+      puts "\e[31mentering their number on the board.\e[0m"
+    end
+
     def play_or_exit
       print "\e[34mDo you want to play again? (y/n)\e[0m"
       gets.chomp
