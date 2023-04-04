@@ -11,16 +11,6 @@ class HumanPlayer
     prompt_message
     guess_code = gets.chomp.split
   end
-
-  private
-
-  def prompt_message
-    puts 'Please enter your guess using numbers of each color.' unless code_maker
-    puts 'Please enter your secret code using numbers of each color.' if code_maker
-    puts 'Note: the numbers must be'
-    puts " - \e[31mIn correct order \e[37m(left-right)\e[0m\e[0m"
-    puts " - \e[31mSeparated by spaces.\e[37m(ex. 1 2 3 4)\e[0m\e[0m"
-  end
 end
 
 # define behavior of computer player
