@@ -72,4 +72,17 @@ module Mastermind
       gets.chomp
     end
   end
+
+  # provides methods for validating user input
+  module Validator
+    include MastermindConfig
+
+    def valid_code?(code)
+      SOLUTION_CODES.include?(code.join('').to_i)
+    end
+
+    def valid_player?(selected_option)
+      %w[1 2].include?(selected_option)
+    end
+  end
 end
