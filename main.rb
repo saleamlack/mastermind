@@ -12,7 +12,7 @@ class PlayMastermind
 
   def play
     game = Game.new(HumanPlayer.new, ComputerPlayer.new)
-    board = Borad.new
+    board = Board.new
     game.start_game(board)
   rescue Interrupt
     puts "\nExiting the game..."
