@@ -26,7 +26,7 @@ Show your love by giving a :star:!
 8. If you break the code, you win!
 9. If you run out of turns, the code-maker wins!
 
-**Now is the time to play.** :smiling_face_with_three_hearts:
+**Now is the time to play.** :video_game:
 1. Clone the repository to your local machine and navigate to the root directory of the game
     ```ruby
     $ git clone https://github.com/saleamlack/mastermind.git
@@ -36,3 +36,6 @@ Show your love by giving a :star:!
     $ ruby main.rb
     ```
 3. Follow the instructions displayed in the terminal to play the game
+
+## live Demo
+[Mastermind](https://replit.com/@Saleamlack/mastermind?v=1)
